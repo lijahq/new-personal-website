@@ -8,13 +8,15 @@
 
 	const fetchProjects = async () => {
 		try {
-			// Fetch all projects
-			const querySnapshot = await getDocs(collection(db, 'projects'));
-			projects = querySnapshot.docs.map((doc) => ({
-				name: doc.id,
-				dateCreated: doc.data()['date created']
-			}));
-			console.log('Fetched projects:', projects);
+			const query = await getDocs(collection(db, 'projects'));
+			projects = query.docs.map((project) => {
+				const data = project.data();
+				return {
+					id: project.id,
+					name: data.name,
+					dateCreated: data.dateCreated
+				};
+			});
 		} catch (error) {
 			console.error('Error fetching documents:', error);
 			errorMessage = 'Failed to fetch projects. Please try again later.';
