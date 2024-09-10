@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { db } from '../firebase';
-	import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+	import { collection, getDocs } from 'firebase/firestore';
 	import { onMount } from 'svelte';
 
 	let projects: Project[] = [];
@@ -35,8 +35,9 @@
 {:else}
 	<ul>
 		{#each projects as project}
-			{console.log(project.dateCreated)}
 			<li>
+				<strong>ID:</strong>
+				{project.id} <br />
 				<strong>Name:</strong>
 				{project.name} <br />
 				<strong>Date Created:</strong>
